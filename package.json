@@ -4,7 +4,7 @@
   "description": "CozoScript grammar for tree-sitter",
   "main": "bindings/node",
   "keywords": ["parser", "tree-sitter", "cozo", "cozoscript", "datalog"],
-  "license": "MIT",
+  "license": "LNA",
   "dependencies": {
     "nan": "^2.18.0"
   },
