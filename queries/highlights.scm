@@ -40,15 +40,23 @@
 (fixed_rule "<~" @keyword.operator)
 
 ; ─── Imperative control flow ─────────────────────────────
-(if_block) @keyword.control
-(if_not_block) @keyword.control
-(loop_block) @keyword.control
-(debug_statement) @keyword.control
-(ignore_error_statement) @keyword.control
-(return_statement) @keyword.control
-(break_statement) @keyword.control
-(continue_statement) @keyword.control
-(swap_statement) @keyword.control
+(if_block "%if" @keyword.control)
+(if_block "%then" @keyword.control)
+(if_block "%else" @keyword.control)
+(if_block "%end" @keyword.control)
+(if_not_block "%if_not" @keyword.control)
+(if_not_block "%then" @keyword.control)
+(if_not_block "%else" @keyword.control)
+(if_not_block "%end" @keyword.control)
+(loop_block "%loop" @keyword.control)
+(loop_block "%end" @keyword.control)
+(loop_block "%mark" @keyword.control)
+(break_statement "%break" @keyword.control)
+(continue_statement "%continue" @keyword.control)
+(return_statement "%return" @keyword.control)
+(debug_statement "%debug" @keyword.control)
+(ignore_error_statement "%ignore_error" @keyword.control)
+(swap_statement "%swap" @keyword.control)
 
 ; ─── Expressions ─────────────────────────────────────────
 
@@ -102,6 +110,9 @@
   key: (identifier) @variable.other.member)
 
 (index_option
+  key: (identifier) @variable.other.member)
+
+(data_field
   key: (identifier) @variable.other.member)
 
 (object_pair

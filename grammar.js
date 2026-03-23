@@ -197,7 +197,19 @@ module.exports = grammar({
         $.command_name,
       )),
       field('target', $._name),
-      optional($.schema_body),
+      optional(choice($.schema_body, $.data_object)),
+    ),
+
+    data_object: $ => seq(
+      '{',
+      optional(comma_sep_trailing($.data_field)),
+      '}',
+    ),
+
+    data_field: $ => seq(
+      field('key', $.identifier),
+      ':',
+      field('value', $._expression),
     ),
 
     schema_body: $ => seq(
@@ -484,11 +496,10 @@ module.exports = grammar({
       "'",
     ),
 
-    // Raw strings use _*"..."_* delimiters (not r"...")
+    // Raw strings use _*"..."_* delimiters
     _raw_string: $ => token(choice(
       seq('_"', /[^"]*/, '"_'),
       seq('__"', /[^"]*/, '"__'),
-      seq('"', /[^"\\]*/, '"'),
     )),
 
     escape_sequence: $ => token.immediate(seq(
