@@ -1,0 +1,54 @@
+================================================================================
+Create relation with schema
+================================================================================
+
+:create Planet { name: String => glyph: String, stage: Int, dignity: String }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (mutation_command
+    command: (command_name)
+    target: (identifier)
+    (schema_body
+      (column_definition
+        name: (identifier)
+        type: (col_type
+          (simple_type)))
+      (column_definition
+        name: (identifier)
+        type: (col_type
+          (simple_type)))
+      (column_definition
+        name: (identifier)
+        type: (col_type
+          (simple_type)))
+      (column_definition
+        name: (identifier)
+        type: (col_type
+          (simple_type))))))
+
+================================================================================
+System command - list relations
+================================================================================
+
+::relations
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (system_command
+    (command_name)))
+
+================================================================================
+Remove relation
+================================================================================
+
+::remove my_relation
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (system_command
+    (command_name)
+    (identifier)))

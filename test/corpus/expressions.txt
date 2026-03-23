@@ -1,0 +1,80 @@
+================================================================================
+Binary expressions with comparisons
+================================================================================
+
+?[x] := a(x), x > 5, x < 100
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (function_call
+            name: (identifier)
+            (identifier)))
+        (disjunction
+          (binary_expression
+            left: (identifier)
+            operator: (operator)
+            right: (number)))
+        (disjunction
+          (binary_expression
+            left: (identifier)
+            operator: (operator)
+            right: (number)))))))
+
+================================================================================
+Unification with function call
+================================================================================
+
+?[name, len] := *words{name}, len = length(name)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier)
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (stored_relation
+            name: (identifier)
+            (named_binding
+              key: (identifier))))
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (function_call
+              name: (identifier)
+              (identifier))))))))
+
+================================================================================
+Arithmetic with precedence
+================================================================================
+
+?[result] := result = 2 + 3 * 4
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (binary_expression
+              left: (number)
+              operator: (operator)
+              right: (binary_expression
+                left: (number)
+                operator: (operator)
+                right: (number)))))))))

@@ -1,0 +1,110 @@
+================================================================================
+Simple query
+================================================================================
+
+?[tool, sub, status] := *sys_command{tool, subcommand: sub, status}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier)
+        (identifier)
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (stored_relation
+            name: (identifier)
+            (named_binding
+              key: (identifier))
+            (named_binding
+              key: (identifier)
+              value: (identifier))
+            (named_binding
+              key: (identifier))))))))
+
+================================================================================
+Constant data rule
+================================================================================
+
+planets[] <- [["Sun", 1], ["Moon", 2]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (constant_rule
+      head: (rule_head
+        name: (identifier))
+      body: (list
+        (list
+          (string)
+          (number))
+        (list
+          (string)
+          (number))))))
+
+================================================================================
+Algorithm rule
+================================================================================
+
+out[] <~ PageRank(edges: graph, damping: 0.85)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (fixed_rule
+      head: (rule_head
+        name: (identifier))
+      algorithm: (identifier)
+      (fixed_arg
+        (fixed_option
+          key: (identifier)
+          value: (identifier)))
+      (fixed_arg
+        (fixed_option
+          key: (identifier)
+          value: (number))))))
+
+================================================================================
+Recursive rule
+================================================================================
+
+reachable[a, b] := edge(a, b)
+reachable[a, b] := edge(a, c), reachable(c, b)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        name: (identifier)
+        (identifier)
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (function_call
+            name: (identifier)
+            (identifier)
+            (identifier))))))
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        name: (identifier)
+        (identifier)
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (function_call
+            name: (identifier)
+            (identifier)
+            (identifier)))
+        (disjunction
+          (function_call
+            name: (identifier)
+            (identifier)
+            (identifier)))))))

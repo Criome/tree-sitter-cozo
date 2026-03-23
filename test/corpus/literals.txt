@@ -1,0 +1,122 @@
+================================================================================
+Number literals
+================================================================================
+
+?[a, b, c] := a = 42, b = 3.14, c = 0xff
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier)
+        (identifier)
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (number)))
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (number)))
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (number)))))))
+
+================================================================================
+Boolean and null
+================================================================================
+
+?[x, y] := x = true, y = null
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier)
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (boolean)))
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (null)))))))
+
+================================================================================
+List literal
+================================================================================
+
+?[x] := x = [1, 2, 3]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (list
+              (number)
+              (number)
+              (number))))))))
+
+================================================================================
+Parameter binding
+================================================================================
+
+?[name] := *users{name, age}, age > $min_age
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (stored_relation
+            name: (identifier)
+            (named_binding
+              key: (identifier))
+            (named_binding
+              key: (identifier))))
+        (disjunction
+          (binary_expression
+            left: (identifier)
+            operator: (operator)
+            right: (parameter)))))))
+
+================================================================================
+Comment
+================================================================================
+
+# This is a comment
+?[x] := x = 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (rule_definition
+    (inline_rule
+      head: (rule_head
+        (identifier))
+      body: (rule_body
+        (disjunction
+          (unification
+            left: (identifier)
+            right: (number)))))))

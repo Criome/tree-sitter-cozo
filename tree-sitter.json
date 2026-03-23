@@ -1,0 +1,29 @@
+{
+  "grammars": [
+    {
+      "name": "cozo",
+      "camelCase": false,
+      "scope": "source.cozo",
+      "path": ".",
+      "file-types": ["cozo"],
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "LNA",
+    "description": "CozoScript grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Li"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/Criome/tree-sitter-cozo"
+    }
+  },
+  "bindings": {
+    "c": true
+  }
+}
